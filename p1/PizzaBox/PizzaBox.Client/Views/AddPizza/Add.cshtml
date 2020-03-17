@@ -1,0 +1,39 @@
+@using PizzaBox.Domain.Models
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Pizza</title>
+</head>
+
+<body class="container-md">
+ 
+    <div class= "row mt-5">
+       <form class="col-md-4 offset-md-4">
+          <div class="jumbotron text-center">
+          <h1 class="display-4">Add Pizza</h1>
+        </div>
+        @{
+          List<Pizza> pizzas= (List<Pizza>)ViewData["pizzas"];
+          foreach (var item in pizzas)
+          {
+            int id = (int)@ViewData["storeid"];
+            <div class="form-group">
+                <p>
+                  @item.Name
+                  $@item.Price
+                  @item.GetNote(id) 
+                  <input class="form-control" type="number" name="Quantity" min="0" max="50">
+                </p> 
+            </div>
+          }
+          }
+        </form>   
+    </div>
+    
+
+</body>
+
+</html>

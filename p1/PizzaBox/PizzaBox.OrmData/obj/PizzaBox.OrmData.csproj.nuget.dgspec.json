@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "restore": {
+    "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.OrmData/PizzaBox.OrmData.csproj": {}
+  },
+  "projects": {
+    "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "projectName": "PizzaBox.Domain",
+        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "packagesPath": "/home/hassan/.nuget/packages/",
+        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/hassan/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.OrmData/PizzaBox.OrmData.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.OrmData/PizzaBox.OrmData.csproj",
+        "projectName": "PizzaBox.OrmData",
+        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.OrmData/PizzaBox.OrmData.csproj",
+        "packagesPath": "/home/hassan/.nuget/packages/",
+        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.OrmData/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/hassan/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1/PizzaBox/PizzaBox.Domain/PizzaBox.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "microsoft.entityframeworkcore.design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "microsoft.entityframeworkcore.sqlserver": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
