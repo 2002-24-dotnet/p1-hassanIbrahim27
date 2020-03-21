@@ -44,30 +44,52 @@
       </div>
 
       <div class="form-group">
+        <p class="text-danger">@ViewData["QtyError"]</p>      
+      </div>
+
+      <div class="form-group">
         <button type="submit" class="btn btn-primary">Add to Cart</button>
       </div>
+      
     </form>
     
     <div class="col-md-6">
       @{
             @foreach (var item in @SessionData.cart)
             {
-              var url = @Url.Action("RemoveFromCart","Order");
+              <div class="row">
+                <div class="col-md-1">
+                   <a asp-controller="order"
+                   asp-action="RemoveFromCart"
+                   asp-route-name="@item.Key">
+                   <i class="fa fa-trash"></i>
+                   </a>
+                </div>
+                <div class="col-md-11">
+                  <p>@Model.CartString(@item.Key, @item.Value)</p>
+                </div>
+              </div>
+               
               
-              <p>
-
-                <i class="fa fa-trash" ></i>
-                <button class="btn btn-info" type="button" onclick="location.href=url + ?name= @item.Key ">
-                @item.Key @item.Value
-
-              </p>
             }
           }
     </div>
-   </div>    
+   </div>   
 
    <div class="row">
-    <button type="submit" class="btn btn-primary">Check Out</button>
+     <div class="offset-md-8">
+        <p class="text-danger">@ViewData["CheckOutError"]</p>      
+      </div>
+   </div> 
+
+   <div class="row">
+     <div class="offset-md-10">
+        <a asp-controller="order"
+          asp-action="CheckOut"
+          class ="btn btn-primary"
+          >Check Out
+        </a>
+     </div>
    </div>
 </body>
 </html>

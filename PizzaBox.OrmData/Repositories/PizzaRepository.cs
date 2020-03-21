@@ -54,9 +54,13 @@ namespace PizzaBox.OrmData.Repositories
       return _db.Store.ToList();
     }
 
+   
+     public decimal GetPizzaPrice(string name)
+    {
+      var pizza= _db.Pizza.SingleOrDefault(p =>p.Name == name);
+      return pizza.Price;
+      }
 
-     
-     
     public Pizza GetPizzaByName(string name)
     {
       return _db.Pizza.SingleOrDefault(p =>p.Name == name);
