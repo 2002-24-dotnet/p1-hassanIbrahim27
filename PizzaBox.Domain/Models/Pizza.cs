@@ -53,6 +53,18 @@ namespace PizzaBox.Domain.Models
         }
       }
 
+      public bool IsAvailable(int storeId)
+      {
+        if(GetStoreQuantity(storeId)==0)
+        {
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      }
+
 
     }
 

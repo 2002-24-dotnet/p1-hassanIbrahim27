@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Client/PizzaBox.Client.csproj": {}
+    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/PizzaBox.Client.csproj": {}
   },
   "projects": {
-    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Client/PizzaBox.Client.csproj": {
+    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/PizzaBox.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Client/PizzaBox.Client.csproj",
+        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/PizzaBox.Client.csproj",
         "projectName": "PizzaBox.Client",
-        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Client/PizzaBox.Client.csproj",
+        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/PizzaBox.Client.csproj",
         "packagesPath": "/home/hassan/.nuget/packages/",
-        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Client/obj/",
+        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/hassan/.nuget/NuGet/NuGet.Config"
@@ -25,11 +25,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj": {
-                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj"
+              "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj"
               },
-              "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.OrmData/PizzaBox.OrmData.csproj": {
-                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.OrmData/PizzaBox.OrmData.csproj"
+              "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.OrmData/PizzaBox.OrmData.csproj": {
+                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.OrmData/PizzaBox.OrmData.csproj"
               }
             }
           }
@@ -72,14 +72,14 @@
         }
       }
     },
-    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj",
         "projectName": "PizzaBox.Domain",
-        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj",
         "packagesPath": "/home/hassan/.nuget/packages/",
-        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/obj/",
+        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/hassan/.nuget/NuGet/NuGet.Config"
@@ -125,14 +125,14 @@
         }
       }
     },
-    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.OrmData/PizzaBox.OrmData.csproj": {
+    "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.OrmData/PizzaBox.OrmData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.OrmData/PizzaBox.OrmData.csproj",
+        "projectUniqueName": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.OrmData/PizzaBox.OrmData.csproj",
         "projectName": "PizzaBox.OrmData",
-        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.OrmData/PizzaBox.OrmData.csproj",
+        "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.OrmData/PizzaBox.OrmData.csproj",
         "packagesPath": "/home/hassan/.nuget/packages/",
-        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.OrmData/obj/",
+        "outputPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.OrmData/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/hassan/.nuget/NuGet/NuGet.Config"
@@ -146,8 +146,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj": {
-                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27 - Copy/PizzaBox.Domain/PizzaBox.Domain.csproj"
+              "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+                "projectPath": "/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Domain/PizzaBox.Domain.csproj"
               }
             }
           }

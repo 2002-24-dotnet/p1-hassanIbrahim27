@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Domain.Models;
 using PizzaBox.OrmData.Repositories;
 using PizzaBox.Client.Models;
+using System.Collections.Generic;
 
 
 namespace PizzaBox.Client.Controllers
@@ -19,11 +20,22 @@ namespace PizzaBox.Client.Controllers
         [HttpPost]
          public IActionResult Add(OrderViewModel orderviewmodel)
         {
-          //string name = pizzaViewModel.pizza.Name;
-          int quantity=(int)(orderviewmodel.Quantity);
-          // SessionData.pizzaorder.Add("aaa",quantity);
-           ViewData["piz"]=quantity;
-          return View();
+          int quantity=int.Parse(orderviewmodel.Quantity);
+          if(SessionData.cart.ContainsKey(orderviewmodel.PizzaName))
+          {
+            SessionData.cart[orderviewmodel.PizzaName] += quantity;
+          }
+          else
+          {
+             SessionData.cart.Add(orderviewmodel.PizzaName,quantity);
+          }
+          return View(orderviewmodel);
+        }
+
+        public IActionResult RemoveFromCart(string name)
+        {
+          SessionData.cart.Remove(name);
+          return View(new OrderViewModel());
         }
     }
     

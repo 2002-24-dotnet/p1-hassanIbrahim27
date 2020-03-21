@@ -1,0 +1,73 @@
+@using PizzaBox.Domain.Models
+@using System.Collections.Generic
+@model PizzaBox.Client.Models.OrderViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Pizza</title>
+</head>
+
+<body class="container-md">
+  <div class= "row">
+    <div class="jumbotron text-center col-md-12">
+      <h1 class="display-4">Add Pizza</h1>
+    </div>
+  </div>
+
+  <div class= "row mt-1">
+    <form class="col-md-6" action="/Order/Add" method="post">
+      <div class="form-group">
+        <label>Pizza</label>
+        <select class="form-control" name="PizzaName">
+          @{
+            @foreach (var item in @Model.PizzaList)
+            {
+              if(@item.IsAvailable(SessionData.StoreId))
+              {
+                <option value ="@item.Name">@item.Name @item.Price</option>
+              }
+              else
+              {
+                 <option value ="@item.Name" disabled>@item.Name $@item.Price @item.GetNote(SessionData.StoreId)</option>
+              }
+            }
+          }
+        </select>
+      </div>
+       
+
+      <div class="form-group">
+        <input class="form-control"  required type="number" name="Quantity" id="Quantity" min="1" max="50">
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+      </div>
+    </form>
+    
+    <div class="col-md-6">
+      @{
+            @foreach (var item in @SessionData.cart)
+            {
+              var url = @Url.Action("RemoveFromCart","Order");
+              
+              <p>
+
+                <i class="fa fa-trash" ></i>
+                <button class="btn btn-info" type="button" onclick="location.href=url + ?name= @item.Key ">
+                @item.Key @item.Value
+
+              </p>
+            }
+          }
+    </div>
+   </div>    
+
+   <div class="row">
+    <button type="submit" class="btn btn-primary">Check Out</button>
+   </div>
+</body>
+</html>

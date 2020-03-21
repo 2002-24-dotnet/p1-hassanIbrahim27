@@ -13,9 +13,7 @@ namespace PizzaBox.Client.Controllers
       public StoreRepository _sr = new StoreRepository();
        public IActionResult UserMenu()
       {
-        
-        ViewData["UserID"]=SessionData.UserId;
-        return View(new LocationViewModel());
+        return View("location",new LocationViewModel());
       }
 
       [HttpPost]
@@ -24,7 +22,8 @@ namespace PizzaBox.Client.Controllers
          var RadioButton = Int32.Parse(Request.Form["Radio"]);
          var store=_sr.GetStoreById(RadioButton);
          SessionData.StoreId=store.StoreId;
-         return RedirectToAction("Add","Pizza",store);
+         SessionData.cart = new Dictionary<string, int>();
+         return View("Add",new OrderViewModel());
       }
 
 

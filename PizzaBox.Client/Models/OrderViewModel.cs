@@ -8,18 +8,21 @@ namespace PizzaBox.Client.Models
   public class OrderViewModel
   {
 
-    public PizzaRepository _pr = new PizzaRepository();
+    public static PizzaRepository _pr = new PizzaRepository();
     public List<Pizza> PizzaList{ get; set; }
 
 
 
-    public string pizza{ get; set; }
-    public int Quantity{get;set;}
-
+    public string PizzaName{ get; set; }
+    public string Quantity{get;set;}
+    //public Dictionary<string,int> cart = new Dictionary<string,int>();
+    
     public OrderViewModel()
     {
-      PizzaList =  _pr.GetPizza();
+      PizzaList =  _pr.GetStorePizzas(SessionData.StoreId);
+      
     }
+    
 
   }
 

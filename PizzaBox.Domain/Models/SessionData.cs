@@ -6,6 +6,6 @@ namespace PizzaBox.Domain.Models
     {
       public static int UserId{get;set;}
       public static int StoreId{get;set;}
-      public static Dictionary<string,int> pizzaorder{get;set;}
+      public static Dictionary<string,int> cart = new Dictionary<string,int>();
     }
 }
