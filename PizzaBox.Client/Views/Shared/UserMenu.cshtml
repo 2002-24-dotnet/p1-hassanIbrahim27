@@ -1,7 +1,20 @@
-<h1>User</h1>
+@using PizzaBox.Domain.Models
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 
+<h1>User @ViewData["OrderStatus"]</h1>
+<div class="row">
+  <div class="col-md-6">
+   
+    <p>Welcome @httpContextAccessor.HttpContext.Session.GetString("UserName")</p>
+
+  </div>
+  <div class="offset-md-4">
+    <a href="/account/logout">logout</a>
+  </div>
+</div>
   <a href="/User/History">order history</a>
 
   <a href="/Menu/UserMenu">place order</a>
 
-  <a href="/account/logout">logout</a>
+  

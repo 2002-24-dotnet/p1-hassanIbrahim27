@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using PizzaBox.Domain.Models;
 using PizzaBox.OrmData.Repositories;
+using Microsoft.AspNetCore.Http;
+
 
 namespace PizzaBox.Client.Models
 {
@@ -11,17 +13,18 @@ namespace PizzaBox.Client.Models
     public static PizzaRepository _pr = new PizzaRepository();
     public List<Pizza> PizzaList { get; set; }
 
-
+    public int StoreId{get;set;}
 
     public string PizzaName { get; set; }
     public string Quantity { get; set; }
-    //public Dictionary<string,int> cart = new Dictionary<string,int>();
 
-    public OrderViewModel()
+    public OrderViewModel(int storeid)
     {
-      PizzaList = _pr.GetStorePizzas(SessionData.StoreId);
+      StoreId=storeid;
+      PizzaList = _pr.GetStorePizzas(StoreId);
 
     }
+    public OrderViewModel(){}
     public string CartString(string name, int qty)
     {
       decimal singleprice = _pr.GetPizzaPrice(name);

@@ -3,70 +3,97 @@ using PizzaBox.Domain.Models;
 using PizzaBox.OrmData.Repositories;
 using PizzaBox.Client.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using PizzaBox.Client.Helpers;
 
 
 namespace PizzaBox.Client.Controllers
 {
   public class OrderController : Controller
   {
+    public decimal GrandTotal = 0;
     private PizzaRepository _pr = new PizzaRepository();
+    private OrderRepository _or = new OrderRepository();
 
     [HttpGet]
     public IActionResult Add()
     {
-      ViewData["StoreId"] = SessionData.StoreId;
-      return View(new OrderViewModel());
+      ViewData["StoreId"] = HttpContext.Session.GetInt32("StoreId");
+      return View(new OrderViewModel((int)ViewData["StoreId"]));
     }
 
 
     [HttpPost]
     public IActionResult Add(OrderViewModel orderviewmodel)
     {
-      int totalqty = 0;
-      foreach (var item in SessionData.cart)
-      {
-        totalqty += item.Value;
-      }
       int quantity = int.Parse(orderviewmodel.Quantity);
-      if (totalqty + quantity > 50)
+      if (SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart") == null)
       {
-        ViewData["QtyError"] = "Can't exceed 50 Pizzas";
+        Dictionary<string, int> cart = new Dictionary<string, int>();
+        cart.Add(orderviewmodel.PizzaName, quantity);
+        SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
       }
       else
       {
-        if (SessionData.cart.ContainsKey(orderviewmodel.PizzaName))
+        Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart");
+        int totalqty = 0;
+        foreach (var item in cart)
         {
-          SessionData.cart[orderviewmodel.PizzaName] += quantity;
+          totalqty += item.Value;
+        }
+        
+        if (totalqty + quantity > 50)
+        {
+          ViewData["QtyError"] = "Can't exceed 50 Pizzas";
         }
         else
         {
-          SessionData.cart.Add(orderviewmodel.PizzaName, quantity);
+          if (cart.ContainsKey(orderviewmodel.PizzaName))
+          {
+            cart[orderviewmodel.PizzaName] += quantity;
+          }
+          else
+          {
+            cart.Add(orderviewmodel.PizzaName, quantity);
+          }
         }
+        SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
       }
 
-      return View(orderviewmodel);
+
+      return View(new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
     }
 
 
     public IActionResult RemoveFromCart(string name)
     {
-      SessionData.cart.Remove(name);
-      return View("Add", new OrderViewModel());
+
+      Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart");
+      cart.Remove(name);
+      SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+      return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
     }
 
     public IActionResult CheckOut()
     {
-      decimal GrandTotal=0;
-      foreach (var item in SessionData.cart)
+      Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart");
+
+      foreach (var item in cart)
       {
         GrandTotal += item.Value * _pr.GetPizzaPrice(item.Key);
       }
-      if(GrandTotal>250)
+      if (GrandTotal > 250)
       {
-        ViewData["CheckOutError"]="Your total can't exceed $250";
+        ViewData["CheckOutError"] = "Your total can't exceed $250";
       }
-
-      return View("Add", new OrderViewModel());
+      else
+      {
+        _or.AddOrder(cart, HttpContext.Session.GetString("UserName"), (int)HttpContext.Session.GetInt32("StoreId"), GrandTotal);
+        ViewData["OrderStatus"] = "Order Submit";
+        return View("UserMenu");
+      }
+      SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", new Dictionary<string,int>());
+      return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
     }
   }
 

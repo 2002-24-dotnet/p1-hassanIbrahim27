@@ -1,6 +1,12 @@
 @using PizzaBox.Domain.Models
 @using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using PizzaBox.Client.Helpers
+@inject IHttpContextAccessor httpContextAccessor
+
+  
 @model PizzaBox.Client.Models.OrderViewModel
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,13 +31,13 @@
           @{
             @foreach (var item in @Model.PizzaList)
             {
-              if(@item.IsAvailable(SessionData.StoreId))
+              if(@item.IsAvailable((int)@httpContextAccessor.HttpContext.Session.GetInt32("StoreId")))
               {
                 <option value ="@item.Name">@item.Name @item.Price</option>
               }
               else
               {
-                 <option value ="@item.Name" disabled>@item.Name $@item.Price @item.GetNote(SessionData.StoreId)</option>
+                 <option value ="@item.Name" disabled>@item.Name $@item.Price @item.GetNote((int)@httpContextAccessor.HttpContext.Session.GetInt32("StoreId"))</option>
               }
             }
           }
@@ -55,7 +61,7 @@
     
     <div class="col-md-6">
       @{
-            @foreach (var item in @SessionData.cart)
+            @foreach (var item in SessionHelper.GetObjectFromJson<Dictionary<string, int>>(@httpContextAccessor.HttpContext.Session, "cart"))
             {
               <div class="row">
                 <div class="col-md-1">
@@ -78,7 +84,7 @@
 
    <div class="row">
      <div class="offset-md-8">
-        <p class="text-danger">@ViewData["CheckOutError"]</p>      
+        <p class="text-danger">@ViewData["CheckOutError"]</p>
       </div>
    </div> 
 

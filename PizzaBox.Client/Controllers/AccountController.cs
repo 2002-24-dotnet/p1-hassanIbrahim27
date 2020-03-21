@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Domain.Models;
 using PizzaBox.OrmData.Repositories;
 using PizzaBox.Client.Models;
+using Microsoft.AspNetCore.Http;
+
 
 namespace PizzaBox.Client.Controllers
 {
@@ -31,7 +33,8 @@ namespace PizzaBox.Client.Controllers
 
             }
             
-           SessionData.UserId=validUser.UserId;
+            HttpContext.Session.SetInt32("UserId",validUser.UserId);
+            HttpContext.Session.SetString("UserName",user.UserName);
             if(user.Type=="S")
              return View("Store");
             else
