@@ -78,7 +78,7 @@ namespace PizzaBox.Client.Controllers
     public IActionResult Logout()
     {
       HttpContext.Session.SetInt32("UserId", 0);
-       HttpContext.Session.SetInt32("StoreId", 0);
+      HttpContext.Session.SetInt32("StoreId", 0);
       HttpContext.Session.SetString("UserName", "");
       HttpContext.Session.SetString("UserType", "");
       return View("login");

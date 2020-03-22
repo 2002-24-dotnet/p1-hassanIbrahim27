@@ -13,6 +13,7 @@ namespace PizzaBox.Client.Controllers
   public class MenuController : Controller
   {
     public StoreRepository _sr = new StoreRepository();
+    public OrderRepository _or = new OrderRepository();
     public IActionResult UserMenu()
     {
       return View("location", new LocationViewModel());
@@ -40,7 +41,16 @@ namespace PizzaBox.Client.Controllers
         Dictionary<string, int> cart = new Dictionary<string, int>();
         SessionHelper.SetObjectAsJson(HttpContext.Session, "cart-"+userid, cart);
       }
-      return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
+      bool check = _or.LatestStore( HttpContext.Session.GetString("UserName"),(int)HttpContext.Session.GetInt32("StoreId"));
+      if(check==false)
+      {
+         return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
+      }
+      else
+     {
+       ViewData["LocationError"]="Sorry you can't order from this store now";
+       return View("location", new LocationViewModel());
+     }
     }
 
 

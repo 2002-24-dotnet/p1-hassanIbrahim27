@@ -18,8 +18,8 @@
 
 <body class="container-md">
   <div class= "row">
-    <div class="jumbotron text-center col-md-12">
-      <h1 class="display-4">Add Pizza</h1>
+    <div class="jumbotron text-center col-md-12" style="background: url('@Url.Content("~/Images/Pizza.jpeg")') no-repeat;background-size: 100%;">
+      <h1 class="display-4" style="color:white; font-weight: 400;">Add Pizza</h1>
     </div>
   </div>
 
@@ -88,6 +88,7 @@
 
    <div class="row">
      <div class="offset-md-8">
+        <p class="text-danger">@ViewData["OrderError"]</p>
         <p class="text-danger">@ViewData["CheckOutError"]</p>
       </div>
    </div> 

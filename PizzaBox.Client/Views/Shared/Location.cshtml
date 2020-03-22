@@ -9,8 +9,8 @@
 
 <body>
   <form  action="/menu/Location" method="post">
-    <div class="jumbotron text-center">
-      <h1 class="display-4">User Menu @ViewData["UserID"]</h1>
+    <div class="jumbotron text-center" style="background: url('@Url.Content("~/Images/Pizza.jpeg")') no-repeat;background-size: 100%;">
+      <h1 class="display-4" style="color:white; font-weight: 400;">Choose Location</h1>
     </div>
     @{
       int i=0;
@@ -30,6 +30,7 @@
         i++;
       }
       }
+      <p class="text-danger">@ViewData["LocationError"]</p>
     <button type="submit" class="btn btn-primary">Select Location</button>
   </form>
 </body>

@@ -43,7 +43,7 @@ namespace PizzaBox.OrmData.Repositories
       public List<Order> UserHistory(string username)
       {
         List<Order> UserOrders = new List<Order>();
-        long userId= _ur.GetUserByName(username).UserId;
+        int userId= _ur.GetUserByName(username).UserId;
         List<Order> Order = _db.Order.Include(o =>o.PizzaOrders).ToList();
         foreach (var order in Order)
         {
@@ -160,20 +160,20 @@ namespace PizzaBox.OrmData.Repositories
           List<Order> Order = UserHistory(name);
           if (Order.Count == 0)
           {
-            return true;
+            return false;
           }
           else
           {
             foreach (var item in Order)
               {
-                if(item.StoreId==storeid)
+                if(item.StoreId!=storeid)
                 {
                   UserOrders.Add(item);
                 }
           }
           if(UserOrders.Count==0)
           {
-            return true;
+            return false;
           }
           else
           {
@@ -181,11 +181,11 @@ namespace PizzaBox.OrmData.Repositories
           TimeSpan ts = DateTime.Now - UserOrders.Max(o => o.Date);          
           if(ts.TotalHours > 24)
             {
-              return true;
+              return false;
             }
             else
             {
-              return false;
+              return true;
             }
           }
           }
