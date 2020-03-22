@@ -1,1 +1,34 @@
+@model PizzaBox.Client.Models.HistoryViewModel
+
 <h1>User History</h1>
+@{
+  int i=0;
+  foreach (var item in @Model.orderHistory)
+  {
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="heading@(i)">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)">
+                @item.Date | Total : $@item.TotalPrice
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapse@(i)" class="collapse" aria-labelledby="heading@(i)" data-parent="#accordion">
+            <div class="card-body">
+              <ul>
+                @foreach (var piz in item.PizzaOrders)
+                {
+                    <li>
+                      @piz.Quantity @Model.GetPizzaName(@piz.PizzaId) $@piz.Price
+                    </li>
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      i++;
+  }
+}

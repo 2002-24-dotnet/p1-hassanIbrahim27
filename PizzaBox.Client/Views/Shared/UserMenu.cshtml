@@ -2,19 +2,39 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor httpContextAccessor
 
-<h1>User @ViewData["OrderStatus"]</h1>
-<div class="row">
-  <div class="col-md-6">
-   
-    <p>Welcome @httpContextAccessor.HttpContext.Session.GetString("UserName")</p>
+<div class="row justify-content-center">
+  <h4 class="text-success">@ViewData["OrderStatus"]</h4>
+</div>
 
+<div class="row mt-5">
+  <div class="col-md-4 offset-md-1 text-center">
+    <div class="row justify-content-center">
+       <a asp-controller="User" asp-action="History">
+      <i class="fas fa-file-invoice-dollar" style="font-size: 250px"></i>
+     </a>
+    </div>
+
+     <div class="row justify-content-center mt-3">
+      <h3>Order History</h3>
+    </div>
+   
   </div>
-  <div class="offset-md-4">
-    <a href="/account/logout">logout</a>
+  
+  <div class="col-md-4 offset-md-2 text-center">
+    <div class="row justify-content-center">
+       <a asp-controller="Menu" asp-action="UserMenu">
+      <i class="fas fa-pizza-slice" style="font-size: 250px"></i>
+     </a>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+      <h3>Place Order</h3>
+    </div>
+    
   </div>
 </div>
-  <a href="/User/History">order history</a>
+  
 
-  <a href="/Menu/UserMenu">place order</a>
+  
 
   

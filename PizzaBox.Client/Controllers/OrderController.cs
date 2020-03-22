@@ -14,6 +14,7 @@ namespace PizzaBox.Client.Controllers
     public decimal GrandTotal = 0;
     private PizzaRepository _pr = new PizzaRepository();
     private OrderRepository _or = new OrderRepository();
+    
 
     [HttpGet]
     public IActionResult Add()
@@ -27,74 +28,78 @@ namespace PizzaBox.Client.Controllers
     public IActionResult Add(OrderViewModel orderviewmodel)
     {
       int quantity = int.Parse(orderviewmodel.Quantity);
-      if (SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart") == null)
-      {
-        Dictionary<string, int> cart = new Dictionary<string, int>();
-        cart.Add(orderviewmodel.PizzaName, quantity);
-        SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-      }
-      else
-      {
-        Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart");
-        int totalqty = 0;
-        foreach (var item in cart)
-        {
-          totalqty += item.Value;
-        }
-        
-        if (totalqty + quantity > 50)
-        {
-          ViewData["QtyError"] = "Can't exceed 50 Pizzas";
-        }
-        else
-        {
-          if (cart.ContainsKey(orderviewmodel.PizzaName))
-          {
-            cart[orderviewmodel.PizzaName] += quantity;
-          }
-          else
-          {
-            cart.Add(orderviewmodel.PizzaName, quantity);
-          }
-        }
-        SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-      }
+      int userid = (int)HttpContext.Session.GetInt32("UserId");
 
-
-      return View(new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
-    }
-
-
-    public IActionResult RemoveFromCart(string name)
-    {
-
-      Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart");
-      cart.Remove(name);
-      SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-      return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
-    }
-
-    public IActionResult CheckOut()
-    {
-      Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart");
+      Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart-"+userid);
+      int totalqty = 0;
 
       foreach (var item in cart)
       {
-        GrandTotal += item.Value * _pr.GetPizzaPrice(item.Key);
+        totalqty += item.Value;
       }
-      if (GrandTotal > 250)
+
+      if (totalqty + quantity > 50)
       {
-        ViewData["CheckOutError"] = "Your total can't exceed $250";
+        ViewData["QtyError"] = "Can't exceed 50 Pizzas";
       }
       else
       {
-        _or.AddOrder(cart, HttpContext.Session.GetString("UserName"), (int)HttpContext.Session.GetInt32("StoreId"), GrandTotal);
-        ViewData["OrderStatus"] = "Order Submit";
-        return View("UserMenu");
+        if (cart.ContainsKey(orderviewmodel.PizzaName))
+        {
+          cart[orderviewmodel.PizzaName] += quantity;
+        }
+        else
+        {
+          cart.Add(orderviewmodel.PizzaName, quantity);
+        }
       }
-      SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", new Dictionary<string,int>());
+
+      SessionHelper.SetObjectAsJson(HttpContext.Session, "cart-"+userid, cart);
+      return View(new OrderViewModel((int) HttpContext.Session.GetInt32("StoreId")));
+    }
+
+
+  public IActionResult RemoveFromCart(string name)
+  {
+    int userid = (int)HttpContext.Session.GetInt32("UserId");
+    Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart-"+userid);
+    cart.Remove(name);
+    SessionHelper.SetObjectAsJson(HttpContext.Session, "cart-"+userid, cart);
+    return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
+  }
+
+  public IActionResult CheckOut()
+  {
+    int userid = (int)HttpContext.Session.GetInt32("UserId");
+    int storeid = (int)HttpContext.Session.GetInt32("StoreId");
+    Dictionary<string, int> cart = SessionHelper.GetObjectFromJson<Dictionary<string, int>>(HttpContext.Session, "cart-"+userid);
+    if(cart.Count==0)
+    {
+      ViewData["CheckOutError"] = "Cart is Empty!";
       return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
     }
+    foreach (var item in cart)
+    {
+      GrandTotal += item.Value * _pr.GetPizzaPrice(item.Key);
+    }
+    if (GrandTotal > 250)
+    {
+      ViewData["CheckOutError"] = "Your total can't exceed $250";
+      return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
+    }
+    else
+    {
+      _or.AddOrder(cart, HttpContext.Session.GetString("UserName"), (int)HttpContext.Session.GetInt32("StoreId"), GrandTotal);
+      ViewData["OrderStatus"] = "Order Submitted Successfully";
+      foreach (var item in cart)
+      {
+          _pr.UpdatePizzaQuantity(item.Key,item.Value,storeid);
+      }
+       SessionHelper.SetObjectAsJson(HttpContext.Session, "cart-"+userid, new Dictionary<string, int>());
+      return View("UserMenu");
+    }
+   
   }
+}
 
 }

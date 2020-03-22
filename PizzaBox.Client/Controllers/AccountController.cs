@@ -7,59 +7,77 @@ using Microsoft.AspNetCore.Http;
 
 namespace PizzaBox.Client.Controllers
 {
-    public class AccountController: Controller
+  public class AccountController : Controller
+  {
+    public UserRepository _ur = new UserRepository();
+    public IActionResult Login()
     {
-      public UserRepository _ur = new UserRepository();
-       public IActionResult Login()
+      if (HttpContext.Session.GetInt32("UserId") != null && (int)HttpContext.Session.GetInt32("UserId")!=0 )
+      {
+        if (HttpContext.Session.GetString("UserType")== "S")
+          return View("Store");
+        else
         {
-            return View();
+          return View("UserMenu");
+        }
+      }
+      else
+      {
+        return View();
+      }
+
+    }
+
+
+
+
+
+    [HttpPost]
+    public IActionResult Login(User user)
+    {
+
+      User validUser = _ur.GetUserByName(user.UserName, user.Password);
+      if (validUser != null)
+      {
+        if (validUser.Type != user.Type)
+        {
+          ViewData["error"] = "Invalid Type";
+          return View();
+
         }
 
-
-
-
-
-        [HttpPost]
-        public IActionResult Login(User user)
+        HttpContext.Session.SetInt32("UserId", validUser.UserId);
+        HttpContext.Session.SetString("UserName", user.UserName);
+        HttpContext.Session.SetString("UserType", user.Type);
+        if (user.Type == "S")
+          return View("Store");
+        else
         {
-          
-          User validUser=_ur.GetUserByName(user.UserName,user.Password);
-          if(validUser != null)
-          {
-            if(validUser.Type!=user.Type)
-            {
-            ViewData["error"]="Invalid Type";
-            return View();
-
-            }
-            
-            HttpContext.Session.SetInt32("UserId",validUser.UserId);
-            HttpContext.Session.SetString("UserName",user.UserName);
-            if(user.Type=="S")
-             return View("Store");
-            else
-              {
-                return View("UserMenu");
-              }
-              
-          }
-          
-          else
-          {
-            ViewData["error"]="Wrong Username or Password";
-            return View();
-
-          }
-          
-          
+          return View("UserMenu");
         }
 
+      }
 
-        public IActionResult Logout()
-        {
-          return View("login");
-        }
+      else
+      {
+        ViewData["error"] = "Wrong Username or Password";
+        return View();
+
+      }
 
 
     }
+
+
+    public IActionResult Logout()
+    {
+      HttpContext.Session.SetInt32("UserId", 0);
+       HttpContext.Session.SetInt32("StoreId", 0);
+      HttpContext.Session.SetString("UserName", "");
+      HttpContext.Session.SetString("UserType", "");
+      return View("login");
+    }
+
+
+  }
 }
