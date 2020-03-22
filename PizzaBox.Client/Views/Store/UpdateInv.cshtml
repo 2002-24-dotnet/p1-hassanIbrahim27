@@ -1,0 +1,44 @@
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+@model PizzaBox.Client.Models.UpdateInvViewModel
+@using Microsoft.AspNetCore.Http
+@using PizzaBox.Client.Helpers
+@inject IHttpContextAccessor httpContextAccessor
+
+
+<div class= "row mt-1">
+    <form class="col-md-6" action="/Store/UpdateInventory" method="post">
+      <div class="form-group">
+        <label>Pizza</label>
+        <select class="form-control" name="PizzaName">
+          @{
+            @foreach (var item in @Model.PizzaList)
+            {
+                <option value ="@item.Name">@item.Name @Model.GetQuantity(@item.Name) @item.GetNote((int)@httpContextAccessor.HttpContext.Session.GetInt32("StoreId"))</option>
+            }
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input class="form-control"  required type="number" name="Quantity" id="Quantity" min="0">
+      </div>
+
+      <div class="form-group">
+        <p class="text-success">@ViewData["update"]</p>      
+      </div>
+
+      <div class="form-group">
+        <p class="text-danger">@ViewData["Error"]</p>      
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Quantity</button>
+      </div>
+    </form>
+    </div>
+    pizza : @ViewData["pizza"]
+    qty: @ViewData["Quantity"]
+   store: @ViewData["storeid"]
+

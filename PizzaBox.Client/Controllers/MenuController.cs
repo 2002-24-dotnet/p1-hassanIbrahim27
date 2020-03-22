@@ -23,6 +23,11 @@ namespace PizzaBox.Client.Controllers
       return View("UserMenu");
     }
 
+    public IActionResult GoToStoreMenu()
+    {
+      return View("StoreMenu");
+    }
+
     [HttpPost]
     public IActionResult Location(string Radio)
     {

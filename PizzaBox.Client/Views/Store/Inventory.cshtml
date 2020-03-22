@@ -1,0 +1,25 @@
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+@model PizzaBox.Client.Models.InventoryViewModel
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Pizza</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    @{
+      foreach (var item in Model.PizzaList)
+      {
+          <tr>
+            <th scope="row">@item.Name</th>
+            <td>@Model.GetQuantity(@item.Name)</td>
+          </tr> 
+      }
+    }
+   
+  </tbody>
+</table>

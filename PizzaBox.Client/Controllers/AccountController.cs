@@ -10,12 +10,13 @@ namespace PizzaBox.Client.Controllers
   public class AccountController : Controller
   {
     public UserRepository _ur = new UserRepository();
+    private StoreRepository _sr = new StoreRepository();
     public IActionResult Login()
     {
       if (HttpContext.Session.GetInt32("UserId") != null && (int)HttpContext.Session.GetInt32("UserId")!=0 )
       {
         if (HttpContext.Session.GetString("UserType")== "S")
-          return View("Store");
+          return View("StoreMenu");
         else
         {
           return View("UserMenu");
@@ -50,7 +51,12 @@ namespace PizzaBox.Client.Controllers
         HttpContext.Session.SetString("UserName", user.UserName);
         HttpContext.Session.SetString("UserType", user.Type);
         if (user.Type == "S")
-          return View("Store");
+        {
+          var store = _sr.GetStoreByName(user.UserName);
+          HttpContext.Session.SetInt32("StoreId", store.StoreId);
+          return View("StoreMenu");
+        }
+          
         else
         {
           return View("UserMenu");
