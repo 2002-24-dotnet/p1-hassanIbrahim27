@@ -3,12 +3,13 @@ using PizzaBox.OrmData.Databases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PizzaBox.OrmData.Repositories
 {
     public class StoreRepository
     {
-      private static PizzaBoxDbContext _db = new PizzaBoxDbContext();
+      private static readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
       private static PizzaRepository _pr = new PizzaRepository();
    
               
@@ -26,24 +27,5 @@ namespace PizzaBox.OrmData.Repositories
             {
               return _db.Store.ToList();
             }
-
-               public bool InventoryUpdate(int pizzaid ,int qty, int storeid) //update method
-              {
-                List<Pizza> StorePizzas = _pr.GetStorePizzas(storeid);
-                foreach (var item in StorePizzas)
-                {
-                  foreach (var sp in item.PizzaStores)
-                  {
-                      if(sp.PizzaId==pizzaid && sp.StoreId==storeid)
-                  {
-                    sp.Quantity=sp.Quantity+qty;
-                    return _db.SaveChanges()==1;
-                  }
-                  }
-                  
-                }   
-                return false;             
-              }
-  
       }     
     }

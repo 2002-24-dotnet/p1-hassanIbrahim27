@@ -26,7 +26,7 @@ namespace PizzaBox.OrmData.Repositories
     public List<Pizza> GetStorePizzas(int id)
     {
       List<Pizza> StorePizzas= new List<Pizza>();
-      List<Pizza> Pizzas = _db.Pizza.Include(p => p.PizzaStores).ToList();
+      List<Pizza> Pizzas = _db.Pizza.Include(p => p.PizzaStores).Include(p => p.PizzaOrders).ToList();
       foreach(var pizza in Pizzas)
       {
         foreach(var store in pizza.PizzaStores)

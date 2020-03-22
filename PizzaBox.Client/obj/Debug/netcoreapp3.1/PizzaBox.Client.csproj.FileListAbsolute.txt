@@ -397,3 +397,5 @@
 /mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/obj/Debug/netcoreapp3.1/Razor/Views/Shared/StoreMenu.cshtml.g.cs
 /mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/obj/Debug/netcoreapp3.1/Razor/Views/Store/Inventory.cshtml.g.cs
 /mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/obj/Debug/netcoreapp3.1/Razor/Views/Store/UpdateInv.cshtml.g.cs
+/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/obj/Debug/netcoreapp3.1/Razor/Views/Store/Sales.cshtml.g.cs
+/mnt/c/Users/Hassan/revature.projects/p1-hassanIbrahim27/PizzaBox.Client/obj/Debug/netcoreapp3.1/Razor/Views/Store/UserStoreHistory.cshtml.g.cs

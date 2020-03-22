@@ -10,10 +10,64 @@
 </head>
 
 <body>
-  <div class="jumbotron text-center">
-    <h1 class="display-4">Store Menu</h1>
-    <p class="lead">@ViewData["UserID"]</p>
+
+<div class="row mt-5">
+  <div class="col-md-4 offset-md-1 text-center">
+    <div class="row justify-content-center">
+       <a asp-controller="Store" asp-action="UserStoreHistory">
+      <i class="fas fa-user" style="font-size: 100px"></i>
+     </a>
+    </div>
+
+     <div class="row justify-content-center mt-3">
+      <h3>User History</h3>
+    </div>
+   
   </div>
+  
+  <div class="col-md-4 offset-md-2 text-center">
+    <div class="row justify-content-center">
+       <a asp-controller="Store" asp-action="Sales">
+      <i class="fas fa-dollar-sign" style="font-size: 100px"></i>
+     </a>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+      <h3>Sales</h3>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="row mt-5">
+  <div class="col-md-4 offset-md-1 text-center">
+    <div class="row justify-content-center">
+       <a asp-controller="Store" asp-action="UpdateInventory">
+      <i class="fas fa-people-carry" style="font-size: 100px"></i>
+     </a>
+    </div>
+
+     <div class="row justify-content-center mt-3">
+      <h3>Update Inventory</h3>
+    </div>
+   
+  </div>
+  
+  <div class="col-md-4 offset-md-2 text-center">
+    <div class="row justify-content-center">
+       <a asp-controller="Store" asp-action="Inventory">
+      <i class="fas fa-boxes" style="font-size: 100px"></i>
+     </a>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+      <h3>Inventory</h3>
+    </div>
+    
+  </div>
+</div>
+
 </body>
 
 </html>

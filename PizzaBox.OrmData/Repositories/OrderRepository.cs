@@ -55,20 +55,44 @@ namespace PizzaBox.OrmData.Repositories
           
             
         }
+
         return UserOrders;
         
       }
 
-
-        public List<Order> StoreHistory(int id)
+       public List<Order> UserStoreHistory(string username,int storeid)
       {
-        List<Order> StoreOrders = new List<Order>();
-        int storeId= _sr.GetStoreById(id).StoreId;
+        List<Order> UserStoreOrders = new List<Order>();
+
+        if(_ur.GetUserByName(username) == null) 
+        {
+          return UserStoreOrders;
+        }
+
+        int userId= _ur.GetUserByName(username).UserId;
         List<Order> Order = _db.Order.Include(o =>o.PizzaOrders).ToList();
         foreach (var order in Order)
         {
           
-              if(storeId== order.StoreId)
+              if(userId== order.UserId && storeid==order.StoreId)
+            {
+              UserStoreOrders.Add(order);
+            }
+          
+            
+        }
+        return UserStoreOrders;
+      }
+
+
+        public List<Order> StoreOrders(int id)
+      {
+        List<Order> StoreOrders = new List<Order>();
+        List<Order> Order = _db.Order.Include(o =>o.PizzaOrders).ToList();
+        foreach (var order in Order)
+        {
+          
+              if(id== order.StoreId)
             {
               StoreOrders.Add(order);
             }
@@ -78,6 +102,29 @@ namespace PizzaBox.OrmData.Repositories
         return StoreOrders;
         
         }
+
+         public List<Order> StoreOrdersByDate(int id, DateTime start, DateTime end)
+      {
+        List<Order> StoreOrders = new List<Order>();
+        List<Order> Order = _db.Order.Include(o =>o.PizzaOrders).ToList();
+        foreach (var order in Order)
+        {
+          
+              if(id== order.StoreId)
+            {
+              if(DateTime.Compare(order.Date, start) >= 0 && DateTime.Compare(order.Date, end) <= 0)
+              {
+                StoreOrders.Add(order);
+              }
+              
+            }
+          
+            
+        }
+        return StoreOrders;
+        
+        }
+
 
 
          public bool LatestOrder(string name)

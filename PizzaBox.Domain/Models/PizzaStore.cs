@@ -1,4 +1,4 @@
-  using System;
+using System;
 using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Domain.Models

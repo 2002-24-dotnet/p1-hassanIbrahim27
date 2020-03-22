@@ -81,8 +81,7 @@ namespace PizzaBox.OrmData.Migrations
                 {
                     OrderId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId1 = table.Column<int>(nullable: true),
-                    UserId = table.Column<long>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     StoreId = table.Column<int>(nullable: false),
                     TotalPrice = table.Column<decimal>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false)
@@ -97,11 +96,11 @@ namespace PizzaBox.OrmData.Migrations
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Order_User_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Order_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,9 +189,9 @@ namespace PizzaBox.OrmData.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_UserId1",
+                name: "IX_Order_UserId",
                 table: "Order",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PizzaOrder_OrderId",

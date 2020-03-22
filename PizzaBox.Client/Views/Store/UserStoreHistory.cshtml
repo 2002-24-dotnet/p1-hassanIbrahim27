@@ -1,0 +1,56 @@
+@{
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+@model PizzaBox.Client.Models.UserStoreViewModel
+
+<form class="form-inline" action="/Store/UserStoreHistory" method="post">
+  <div class="form-group mb-2">
+    <label class="sr-only">Start Date</label>
+    <input type="date" name="StartDate" required>
+  </div>
+  <div class="form-group mx-sm-3 mb-2">
+    <label class="sr-only">End Date</label>
+    <input type="date" name="EndDate" required>
+  </div>
+
+  <div class="form-group mx-sm-3 mb-2">
+    <label class="sr-only">User Name</label>
+    <input type="text" name="UserName" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary mb-2">View History</button>
+</form>
+<h5>@ViewData["UserHistory"]</h5>
+
+
+@{
+  int i=0;
+  foreach (var item in @Model.orderHistory)
+  {
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="heading@(i)">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse@(i)" aria-expanded="true" aria-controls="collapse@(i)">
+                @item.Date | Total : $@item.TotalPrice
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapse@(i)" class="collapse" aria-labelledby="heading@(i)" data-parent="#accordion">
+            <div class="card-body">
+              <ul>
+                @foreach (var piz in item.PizzaOrders)
+                {
+                    <li>
+                      @piz.Quantity @Model.GetPizzaName(@piz.PizzaId) $@piz.Price
+                    </li>
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      i++;
+  }
+}

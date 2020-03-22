@@ -10,7 +10,7 @@ using PizzaBox.OrmData.Databases;
 namespace PizzaBox.OrmData.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    [Migration("20200319051231_firstmigration")]
+    [Migration("20200322055317_firstmigration")]
     partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,17 +37,14 @@ namespace PizzaBox.OrmData.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("StoreId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Order");
                 });
@@ -328,7 +325,9 @@ namespace PizzaBox.OrmData.Migrations
 
                     b.HasOne("PizzaBox.Domain.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.PizzaOrder", b =>

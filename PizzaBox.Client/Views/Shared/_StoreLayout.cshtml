@@ -29,7 +29,7 @@
                             <a class="nav-link text-dark" asp-controller="Menu" asp-action="GoToStoreMenu">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Store" asp-action="UserHistory">User History</a>
+                            <a class="nav-link text-dark" asp-controller="Store" asp-action="UserStoreHistory">User History</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Store" asp-action="Sales">Sales</a>
@@ -40,11 +40,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Store" asp-action="Inventory">Inventory</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt" style="font-size:30px"></i></a>
-                        </li>
                     </ul>
                 </div>
+                <p class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt" style="font-size:30px"></i></a>
+                </p>
             </div>
         </nav>
     </header>
@@ -56,7 +56,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Hassan Ibrahim - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - Hassan Ibrahim
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

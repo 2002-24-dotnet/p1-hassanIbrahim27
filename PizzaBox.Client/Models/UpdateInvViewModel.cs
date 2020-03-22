@@ -15,6 +15,7 @@ namespace PizzaBox.Client.Models
 
     public int Quantity{get;set;}
     public string PizzaName{get;set;}
+    public string Type{get;set;}
 
     public int StoreId;
     public UpdateInvViewModel(int storeid)
