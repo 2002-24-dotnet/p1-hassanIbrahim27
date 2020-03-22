@@ -68,7 +68,7 @@
             @foreach (var item in SessionHelper.GetObjectFromJson<Dictionary<string, int>>(@httpContextAccessor.HttpContext.Session, "cart-"+userid))
             {
               <div class="row">
-                <div class="col-md-1">
+                <div class="shakeIt col-md-1">
                    <a asp-controller="order"
                    asp-action="RemoveFromCart"
                    asp-route-name="@item.Key">
