@@ -33,7 +33,7 @@
             {
               if(@item.IsAvailable((int)@httpContextAccessor.HttpContext.Session.GetInt32("StoreId")))
               {
-                <option value ="@item.Name">@item.Name @item.Price</option>
+                <option value ="@item.Name">@item.Name  $@item.Price</option>
               }
               else
               {
@@ -82,6 +82,7 @@
                
               
             }
+            <p>Subtotal : $@Model.cartTotal</p>
           }
     </div>
    </div>   

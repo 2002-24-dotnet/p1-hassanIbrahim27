@@ -17,6 +17,7 @@ namespace PizzaBox.Client.Models
 
     public string PizzaName { get; set; }
     public string Quantity { get; set; }
+    public decimal cartTotal;
 
     public OrderViewModel(int storeid)
     {
@@ -29,6 +30,7 @@ namespace PizzaBox.Client.Models
     {
       decimal singleprice = _pr.GetPizzaPrice(name);
       decimal totalprice = singleprice * qty;
+      cartTotal+=totalprice;
       return name + " | " + qty + " x $" + singleprice + " = $" + totalprice;
     }
 
