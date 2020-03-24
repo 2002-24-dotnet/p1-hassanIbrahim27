@@ -104,7 +104,7 @@ namespace PizzaBox.Client.Controllers
         }
         else
         {
-          ViewData["OrderError"] = "Sorry you cant make an order right now!";
+          ViewData["OrderError"] = "Sorry you cant make more than one order within 2 hours!";
           return View("Add", new OrderViewModel((int)HttpContext.Session.GetInt32("StoreId")));
         }
       }

@@ -48,7 +48,7 @@ namespace PizzaBox.Client.Controllers
       }
       else
      {
-       ViewData["LocationError"]="Sorry you can't order from this store now";
+       ViewData["LocationError"]="Sorry you can't order from two differenet stores within 24 hours";
        return View("location", new LocationViewModel());
      }
     }
